@@ -1,0 +1,30 @@
+<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'about_us' %}">O nas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'kayak_list' %}">Kajaki</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'route_list' %}">Trasy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'order' %}">Zarezerwuj</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Kontakt</a>
+        </li>
+        <li class="nav-item">
+            <button type="button" id="cart" data-html="true" class="nav-link" data-bs-container="body"
+                    data-bs-toggle="popover"
+                    data-bs-placement="bottom" data-bs-content="Tutaj będą dane zamówienia"
+                    style="color: white; background-color: transparent; border: none;">
+                Koszyk(0)
+            </button>
+        </li>
+    </ul>
+</div>

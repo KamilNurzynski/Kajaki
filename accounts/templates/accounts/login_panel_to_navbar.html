@@ -1,0 +1,19 @@
+<div class="collapse navbar-collapse" style="justify-content: end;" id="navbarNav">
+    <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'my_account' %}">Moje konto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">wyloguj</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">zaloguj</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'create_user' %}">zarejestruj</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

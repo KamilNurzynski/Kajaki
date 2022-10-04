@@ -1,0 +1,105 @@
+{% extends 'base_app/base.html' %}
+
+
+{% block content %}
+    <style>
+        .middle_bckg {
+            background-color: rgba(37, 41, 88, .4);
+            width: 1200px;
+            padding: 20px;
+        {#margin: 20px;#} border-radius: 10px;
+            margin: auto;
+            align-items: center;
+        {#display: flex;#}{#    justify-content: center;#} -webkit-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            -moz-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+        }
+
+        #card-general {
+            display: flex;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+    </style>
+    <div class="middle_bckg">
+        <h1>NASZE KAJAKI</h1>
+        {% for kayak in object_list %}
+            <div class="card" id="card-general" style="width: 50rem;">
+                <img class="card-img-top" src="{{ kayak.photo_url }}" height="400" alt="Card image cap">
+                <div class="card-body">
+                    <h5 id="nm{{ kayak.id }}" class="card-title">{{ kayak.name }}</h5>
+                    <h5 class="card-title">Typ kajaka: {{ kayak.type }}</h5>
+                    <h5 class="card-title">{{ kayak.price_addition }}zł</h5>
+                    <a href="/kajaki_app/{{ kayak.id }}/" class="btn btn-primary">Szczegóły</a>
+                    <button id="{{ kayak.id }}" href="#" class="btn atc btn-primary">Dodaj do koszyka</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <script type="text/javascript">
+        console.log('this is working');
+        if (localStorage.getItem('cart') == null) {
+            {#ponizej tworzymy koszyk w formacie json#}
+            var cart = {};
+        } else {
+            {#poniżej nie rozumiem#}
+            cart = JSON.parse(localStorage.getItem('cart'))
+        }
+        $(document).on('click', '.atc', function () {
+            {#console.log('Add button is clicked')#}
+            {#poniżej tworzymy zmienną z id butttona którym jest id kajaku.#}
+            var item_id = this.id.toString();
+
+
+            if (cart[item_id] != undefined) {
+                let quantity = cart[item_id][0] + 1
+                cart[item_id][0] = quantity
+            } else {
+                const quantity = 1;
+                name = document.getElementById("nm" + item_id).innerHTML
+                cart[item_id] = [quantity, name]
+            }
+            {#console.log(cart);#}
+            {#ponizej zapisujemy koszyk do localsotrage(zeby nie znikał przy odswiezaniu strony) w psotaci json#}
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            {#długość słownika cart#}
+            {#Object.keys(cart).length#}
+            document.getElementById("cart").innerHTML = "Koszyk(" + Object.keys(cart).length + ")";
+        });
+        {#poniżej inicjalizacja(włączenie) wszystkich popoverów na stronie#}
+
+        {#document.getElementById("cart").setAttribute('data-bs-content', '<h5>Twój koszyk jest pusty</h5>');#}
+
+
+        function display_cart(cart) {
+            var cartString = "";
+            {#cartString += "<h5>Twój koszyk jest pusty</h5>"#}
+            var cartIndex = 1
+            for (var i in cart) {
+                {#cartString += cartIndex#}
+                cartString += document.getElementById('nm' + i).innerHTML + ". Ilość: " + cart[i][0] + "</br>"
+                cartIndex += 1
+            }
+            cartString += "<a href='{% url 'checkout' %}' class='btn btn-warning' id='checkout'>Do kasy</a>";
+            document.getElementById("cart").setAttribute('data-bs-content', cartString);
+
+
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[id="cart"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl,
+                    {
+                        html: true
+                    })
+            });
+         }
+
+        display_cart(cart);
+    </script>
+{% endblock %}

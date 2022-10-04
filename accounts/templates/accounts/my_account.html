@@ -1,0 +1,47 @@
+{% extends 'base_app/base.html' %}
+{% block content %}
+    <style>
+        .container {
+            background-color: rgba(37, 41, 88, .4);
+            width: 600px;
+            padding: 20px;
+            margin: auto;
+            margin-top: 30px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            -webkit-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            -moz-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+        }
+    </style>
+    <div class="container">
+        <h1>Zalogowany jako: {{ user.username }}</h1>
+
+        {% for order in orders %}
+            <h2>Zamówienie nr: {{ order.id }}</h2>
+            <ul>
+                <li>Rezerwacja na: {{ order.date }}</li>
+                <li>Trasa: {{ order.route }}</li>
+                {% for order_kayak in orders_kayak %}
+                    {% if order_kayak.order == order %}
+                        <li>Model kajaka: {{ order_kayak.kayak }}</li>
+                        <li>Ilość: {{ order_kayak.amount }}szt.</li>
+                    {% endif %}
+                {% endfor %}
+                <li>Koszt zamówienia: {{ order.get_price }}zł</li>
+            </ul>
+        {% endfor %}
+    </div>
+{% endblock %}

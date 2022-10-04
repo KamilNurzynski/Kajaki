@@ -1,0 +1,45 @@
+{% extends 'base_app/base.html' %}
+
+
+{% block content %}
+    <style>
+        .middle_bckg {
+            background-color: rgba(37, 41, 88, .4);
+            width: 1200px;
+            padding: 20px;
+        {#margin: 20px;#} border-radius: 10px;
+            margin: auto;
+            align-items: center;
+        {#display: flex;#}{#    justify-content: center;#} -webkit-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            -moz-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+        }
+
+        .card {
+            display: flex;
+            margin: auto;
+            {#align-items: center;#}
+            {#width: 640px;#}
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+    </style>
+    <div class="middle_bckg">
+        <h1>{{ object.name }}</h1>
+            <div class="card" style="width: 50rem;">
+                <img class="card-img-top" src="{{ object.photo_url }}" height="400" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Model: {{ object.name }}</h5>
+                    <h5 class="card-title">Typ kajaka: {{ object.type }}</h5>
+                    <p class="card-text">{{ object.description }}</p>
+                    <h5 class="card-title">{{ object.price_addition }}zł</h5>
+                    <a href="#" class="btn btn-primary">Dodaj do koszyka</a>
+                </div>
+            </div>
+
+    </div>
+{% endblock %}

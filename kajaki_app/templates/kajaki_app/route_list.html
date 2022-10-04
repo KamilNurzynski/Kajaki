@@ -1,0 +1,47 @@
+{% extends 'base_app/base.html' %}
+
+
+{% block content %}
+    <style>
+        .middle_bckg {
+            background-color: rgba(37, 41, 88, .4);
+            width: 1200px;
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+            align-items: center;
+            -webkit-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            -moz-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+        }
+
+        .card {
+            display: inline-flex;
+            margin: auto;
+            margin-right: 10px;
+
+
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+    </style>
+    <div class="middle_bckg">
+        <h1>TRASY KAJAKOWE</h1>
+        {% for route in object_list %}
+            <div class="card" style="width: 23rem;">
+                <iframe class="card-img-top" src="{{ route.map_url }}" height="400"></iframe>
+                <div class="card-body">
+                    <h5 class="card-title">{{ route.name }}</h5>
+                    <p class="card-text">{{ route.description }}</p>
+                    <h5 class="card-title">{{ route.price }}zł</h5>
+{#                    <a href="#" class="btn btn-primary">Szczegóły</a>#}
+                    <a href="#" class="btn btn-primary">Dodaj do koszyka</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

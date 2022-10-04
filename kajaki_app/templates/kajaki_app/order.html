@@ -1,0 +1,69 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+    <style>
+
+        .container {
+            background-color: rgba(37, 41, 88, .4);
+            width: 500px;
+            padding: 20px;
+            margin: auto;
+            margin-top: 30px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            -webkit-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            -moz-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+
+        }
+
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+        label {
+            color: white;
+        }
+
+    </style>
+
+    <div class="container">
+        <h1>REZERWACJA</h1>
+        <form class="form-group" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="route">Trasa:</label>
+                    <select id="route" name="route" class="form-control">
+                        {% for route in routes %}
+                            <option selected>{{ route }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Data:</label>
+                    <input type="date" class="form-control" id="date" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="kayak">Kajak:</label>
+                    <select id="kayak" name="kayak" class="form-control">
+                        {% for kayak in kayaks %}
+                            <option selected>{{ kayak }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Ilość:</label>
+                    <input type="number" class="form-control" id="amount" name="amount">
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-outline-light">Zarezerwuj</button>
+            {{ message }}
+        </form>
+    </div>
+
+{% endblock %}

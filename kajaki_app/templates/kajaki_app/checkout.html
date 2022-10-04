@@ -1,0 +1,80 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+    <style>
+        .middle_bckg {
+            background-color: rgba(37, 41, 88, .4);
+            width: 1200px;
+            padding: 20px;
+        {#margin: 20px;#} border-radius: 10px;
+            margin: auto;
+            align-items: center;
+        {#display: flex;#}{#    justify-content: center;#} -webkit-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            -moz-box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+            box-shadow: 6px 9px 33px -9px rgba(172, 193, 198, 1);
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+        }
+
+        label {
+            color: white;
+        }
+    </style>
+
+    <div class="middle_bckg">
+        <h1>KASA</h1>
+        <ol class="list-group list-group-numbered" id="item_list">
+            {#            <li class="list-group-item d-flex justify-content-between align-items-start">#}
+            {#                <div class="ms-2 me-auto">#}
+            {#                    <div class="fw-bold">Subheading</div>#}
+            {#                    Content for list item#}
+            {#                </div>#}
+            {#                <span class="badge bg-primary rounded-pill">14</span>#}
+            {#            </li>#}
+        </ol>
+        <div>
+            <form method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="date">Data:</label>
+                        <input type="date" class="form-control" id="date" name="date">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="phone">Phone nr:</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="XXXYYYZZZ">
+                    </div>
+                </div>
+                <br>
+
+                <button type="submit" class="btn btn-primary">Zamów</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        if (localStorage.getItem('cart') == null) {
+            var cart = {};
+        } else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+        for (item in cart) {
+            let name = cart[item][1];
+            let quantity = cart[item][0];
+
+            itemString = `<li class="list-group-item d-flex justify-content-between align-items-start">${name}-${quantity}</li>`;
+            $('#item_list').append(itemString);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base_app/base.html' %}
+{% block content %}
+    <style>
+        p {
+            width: 600px;
+            margin: auto;
+            margin-top: 70px;
+            padding: 20px;
+            border-radius: 10px;
+            text-shadow: 2px 2px 4px #000000;
+            text-align: justify;
+            color: white;
+            font-weight: bold;
+            font-size: 26px;
+        }
+        li{
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+
+    <p>Kajaki i Warszawa to my. Nasza firma to pierwsza i największa wypożyczalnia kajaków w Warszawie przy Wiśle
+        oraz niebanalne spływy kajakowe - spływy Wisłą, kilkudniowe spływy do Warszawy i spływy z Warszawy, jednodniowe
+        wypady oraz nietypowe zamówienia eventowe dla firm, szkół i grup zorganizowanych. Wspólnie odkrywamy nieznane
+        dotąd miejsca i gwarantujemy niezapomnianą przygodę!</p>
+    <ul>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_kayak' %}">Dodaj kajak</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_route' %}">Dodaj trasę</a>
+        </li>
+    </ul>
+
+{% endblock %}
